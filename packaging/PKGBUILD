@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oolspci-bin
+_pkgname=oolspci
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Lists all PCI devices, vendor identifiers, memory regions, and kernel drivers."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oolspci"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oolspci')
+conflicts=('oolspci')
+source_x86_64=("${url}/releases/download/v${pkgver}/oolspci-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oolspci-linux-x86_64" "${pkgdir}/usr/bin/oolspci"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oolspci-uninstall"
+}
